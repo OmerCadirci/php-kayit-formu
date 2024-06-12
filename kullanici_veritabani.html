@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kullanıcı Kayıt Formu</title>
+    <script>
+        function validateForm() {
+            var isim = document.forms["registerForm"]["isim"].value;
+            var soyisim = document.forms["registerForm"]["soyisim"].value;
+            var email = document.forms["registerForm"]["email"].value;
+            var sifre = document.forms["registerForm"]["sifre"].value;
+            var dogumTarihi = document.forms["registerForm"]["dogumTarihi"].value;
+            var cinsiyet = document.forms["registerForm"]["cinsiyet"].value;
+
+            if (isim == "" || soyisim == "" || email == "" || sifre == "" || dogumTarihi == "" || cinsiyet == "") {
+                alert("Tüm alanlar doldurulmalıdır.");
+                return false;
+            }
+
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                alert("Geçerli bir e-posta adresi girin.");
+                return false;
+            }
+
+            if (sifre.length < 6) {
+                alert("Şifre en az 6 karakter uzunluğunda olmalıdır.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2>Kullanıcı Kayıt Formu</h2>
+    <form name="registerForm" action="register.php" onsubmit="return validateForm()" method="post">
+        İsim: <input type="text" name="isim"><br><br>
+        Soyisim: <input type="text" name="soyisim"><br><br>
+        E-posta: <input type="text" name="email"><br><br>
+        Şifre: <input type="password" name="sifre"><br><br>
+        Doğum Tarihi: <input type="date" name="dogumTarihi"><br><br>
+        Cinsiyet: 
+        <input type="radio" name="cinsiyet" value="Erkek"> Erkek
+        <input type="radio" name="cinsiyet" value="Kadın"> Kadın<br><br>
+        <input type="submit" value="Kaydol">
+    </form>
+</body>
+</html>
